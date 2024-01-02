@@ -1,34 +1,28 @@
 import sqlite3
 import discord
+from discord.ext import commands
 
+import modbot.database as database
+from modbot.commands import first_message, reset_configuration
 
-class MyBot(discord.Client):
+class ModBot(commands.Bot):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__( *args, **kwargs)
         self.db_conn = sqlite3.connect('mybot.db')
-        self.init_db()
-
-    def init_db(self):
-        cursor = self.db_conn.cursor()
-        #cursor.execute('CREATE TABLE IF NOT EXISTS server_settings (guild_id INTEGER PRIMARY KEY, settings TEXT)')
-        self.db_conn.commit()
-
+        database.init()
+        
+    async def on_guild_join(self, guild):
+        print(f'Dołączono do nowej gildii: {guild.name}')
+        # create channel and send message
+        channel = await guild.create_text_channel('mybot')
+        await channel.send('Witaj na serwerze!')
+    
     async def on_ready(self):
-        print('Logged in as')
-        print(self.user.name)
-        print(self.user.id)
-        print('------')
-        
-        # tutaj powinien sprawdzić, w jakim stanie jest serwer
-        # jeśli NOT_CONFIGURED, to utworzyć kanał ModBotCongiduration
-        # i przejśc w odpowieni stan
-        
-        # jeśli jest skonfigurowany, to przejść w stan READY
-        
-        
-    async def on_message(self, message):
-        pass
-    
-    
-    async def on_click(self, interaction):
-        pass
+        print(f'Zalogowano jako {self.user}')
+        for g in self.guilds:
+            await first_message(g)
+
+bot = ModBot(command_prefix='/', intents=discord.Intents.all())
+@bot.command(name='reset')
+async def reset(ctx):
+    await reset_configuration(ctx)
