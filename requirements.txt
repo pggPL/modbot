@@ -1,0 +1,2 @@
+discord~=2.3.2
+setuptools~=65.5.0

@@ -6,4 +6,4 @@ inside the directory.
 
 Run with:
 
-``` modbot ```
+``` modbot --token-file <token_file>  ```
