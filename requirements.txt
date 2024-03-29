@@ -1,2 +1,4 @@
 discord~=2.3.2
 setuptools~=65.5.0
+sqlalchemy~=2.0
+alembic~=1.13.1
