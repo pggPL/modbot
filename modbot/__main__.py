@@ -1,8 +1,14 @@
 import argparse
+import asyncio
 
 import discord
 
 from modbot.modbot import bot
+
+
+async def load_extensions(bot_object, extensions):
+    for extension in extensions:
+        await bot_object.load_extension(extension)
 
 
 def main():
@@ -10,7 +16,7 @@ def main():
     parser = argparse.ArgumentParser()
     # arg with flag --token-file
     parser.add_argument('--token-file', type=str, help='path to file with token')
-    
+
     args = parser.parse_args()
     token_file = args.token_file
 
@@ -21,9 +27,12 @@ def main():
     # get token
     with open(token_file, 'r') as f:
         token = f.read().strip()
-        
+
     intents = discord.Intents.all()
     intents.message_content = True
-    
-    
+
+    # Load extensions (cogs)
+    initial_extensions = ['modbot.cogs.add_mailbox', 'modbot.cogs.show_mailboxes']
+    asyncio.run(load_extensions(bot, initial_extensions))
+
     bot.run(token)

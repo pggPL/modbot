@@ -3,14 +3,12 @@ import logging
 from sqlalchemy import create_engine
 
 
-engine = create_engine('sqlite:///modbot.db')
+class Connection:
+    engine = None
 
+    @classmethod
+    def get_engine(cls):
+        if cls.engine is None:
+            cls.engine = create_engine('sqlite:///modbot.db')
+        return cls.engine
 
-# def connect():
-#     try:
-#         engine = create_engine('sqlite:///mybot.db')
-#     except RuntimeError:
-#         logging.error("Could not connect to the database")
-#         raise
-#
-#     return engine
