@@ -1,10 +1,11 @@
 import logging
 
 from sqlalchemy.orm import sessionmaker
-from modbot.database.connect import engine
-from modbot.database.models import Server
+from modbot.database.connect import Connection
+from modbot.database.models import Server, Mailbox
 
-Session = sessionmaker(bind=engine)
+Session = sessionmaker(bind=Connection.get_engine())
+
 
 def add_server(server_id, server_name):
     session = Session()
