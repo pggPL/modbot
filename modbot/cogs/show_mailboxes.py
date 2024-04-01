@@ -16,8 +16,10 @@ class ShowMailboxes(commands.Cog):
         for m in mailboxes:
             result += m.dc_show()
 
-        await ctx.channel.send(result)
-
+        if result:
+            await ctx.channel.send(result)
+        else:
+            await ctx.channel.send("No mailboxes found for this guild.")
 
 
 async def setup(bot):

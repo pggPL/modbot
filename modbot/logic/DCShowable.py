@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod
+import abc
 
-
-class DCShowable(ABC):
-    @abstractmethod
+class DCShowable(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
     def dc_show(self):
         """Returns a string that can be displayed on discord channel"""
         pass

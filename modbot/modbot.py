@@ -13,7 +13,7 @@ class ModBot(commands.Bot):
         # database.init()
         
     async def on_guild_join(self, guild):
-        print(f'Dołączono do nowej gildii: {guild.name}')
+        print(f'Dołączono do nowej gildii: {guild.address}')
         # create channel and send message
         channel = await guild.create_text_channel('mybot')
         await channel.send('Witaj na serwerze!')
