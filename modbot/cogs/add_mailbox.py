@@ -14,9 +14,9 @@ class AddMailbox(commands.Cog):
         def channel_check(m):
             return m.author != self.bot.user and m.channel == channel
 
-        await channel.send("Enter mailbox name:")
+        await channel.send("Enter mailbox address:")
         msg = await self.bot.wait_for("message", check=channel_check)
-        mailbox_name = msg.content
+        mailbox_address = msg.content
         await channel.send("Enter password:")
         msg = await self.bot.wait_for("message", check=channel_check)
         password = msg.content
@@ -24,7 +24,7 @@ class AddMailbox(commands.Cog):
         # await channel.send(f"user entered: (mailbox_name: {mailbox_name}, password: {password})")
 
         try:
-            add_mailbox(Mailbox(name=mailbox_name, password=password, server_id=ctx.guild.id))
+            add_mailbox(Mailbox(address=mailbox_address, password=password, guild_id=ctx.guild.id))
             await channel.send(f"Added mailbox successfully")
         except RuntimeError:
             await channel.send(f"Failed adding mailbox")

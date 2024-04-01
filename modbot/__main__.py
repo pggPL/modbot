@@ -32,7 +32,8 @@ def main():
     intents.message_content = True
 
     # Load extensions (cogs)
-    initial_extensions = ['modbot.cogs.add_mailbox', 'modbot.cogs.show_mailboxes']
+    initial_extensions = ['modbot.cogs.add_mailbox', 'modbot.cogs.show_mailboxes',
+                          'modbot.cogs.emails']
     asyncio.run(load_extensions(bot, initial_extensions))
 
     bot.run(token)
