@@ -12,6 +12,9 @@ class Guild(Base):
     guild_id = Column(Integer, primary_key=True)
     name = Column(String)
 
+    def __repr__(self):
+        return f"<Guild(guild_id={self.guild_id}, name='{self.name}')>"
+
 
 class Mailbox(Base):
     __tablename__ = 'mailboxes'
@@ -30,6 +33,10 @@ class Mailbox(Base):
                 f"name = {self.address}, "
                 f"password = {self.password}) \n")
 
+    def __repr__(self):
+        return f"<Mailbox(mailbox_id={self.mailbox_id}, guild_id={self.guild_id}, " \
+               f"address='{self.address}')>"
+
 
 class Mail(Base):
     __tablename__ = 'mails'
@@ -40,7 +47,6 @@ class Mail(Base):
     subject = Column(Text)
     content = Column(Text)
 
-    # For a more human-readable format
     def dc_show(self):
         return f"""Mail ID: {self.mail_id}
 Sender: {self.sender_address}
@@ -48,3 +54,8 @@ Receiver: {self.receiver_address}
 Subject: {self.subject}
 Content: {self.content}
 """
+
+    def __repr__(self):
+        return f"<Mail(mail_id={self.mail_id}, sender_address='{self.sender_address}', " \
+               f"receiver_address='{self.receiver_address}', " \
+               f"subject='{self.subject[:50]}', content='{self.content[:50]}')>"

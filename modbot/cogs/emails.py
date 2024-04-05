@@ -1,17 +1,18 @@
 from discord.ext import commands
-from modbot.database.emails_utils import get_emails
+from modbot.database.emails_utils import EmailsUtils
 
 
 class EmailsTools(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.emails_db_utils = EmailsUtils()
 
     @commands.command(aliases=['show_mails'])
     async def show_emails(self, ctx: commands.Context):
         """Shows all emails received to the mailboxes
            associated with the guild"""
 
-        emails = get_emails(ctx.guild.id)
+        emails = self.emails_db_utils.get_emails(ctx.guild.id)
 
         result = ""
 
