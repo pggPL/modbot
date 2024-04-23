@@ -7,11 +7,13 @@ class EmailsTools(commands.Cog):
         self.bot = bot
         self.emails_db_utils = EmailsUtils()
 
+    #Make the bot say hello to the user on every channel on the server
     @commands.command(aliases=['show_mails'])
     async def show_emails(self, ctx: commands.Context):
         """Shows all emails received to the mailboxes
            associated with the guild"""
 
+        #FIXME: get emails from the database instead of placeholders
         emails = self.emails_db_utils.get_emails(ctx.guild.id)
 
         result = ""

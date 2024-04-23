@@ -14,6 +14,8 @@ class EmailsUtils:
             self.Session = Session
 
     def get_emails(self, guild_id: int):
+        from modbot.database.placeholders import sample_mails
+        return sample_mails
         """Get all emails received to the mailboxes
            associated with the guild"""
         session = self.Session()
@@ -27,3 +29,4 @@ class EmailsUtils:
         session.close()
 
         return mails
+

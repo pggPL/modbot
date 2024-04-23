@@ -33,7 +33,8 @@ def main():
 
     # Load extensions (cogs)
     initial_extensions = ['modbot.cogs.add_mailbox', 'modbot.cogs.show_mailboxes',
-                          'modbot.cogs.emails']
+                          'modbot.cogs.emails', 'modbot.cogs.show_interface', 'modbot.cogs.respond', 'modbot.cogs.remove_mailbox']
     asyncio.run(load_extensions(bot, initial_extensions))
+    #Create a new channel and send a message
 
     bot.run(token)
